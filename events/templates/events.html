@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Події</title>
+</head>
+<body>
+    <h1>Події групи</h1>
+
+    <a href="{% url 'events:event_calendar' %}">Календар</a>
+
+    {% for event in events %}
+        <div>
+            <h2>
+                <a href="{% url 'events:event_detail' event.pk %}">
+                    {{ event.title }}
+                </a>
+            </h2>
+            <p>{{ event.description }}</p>
+            <p>{{ event.start_date }}</p>
+        </div>
+    {% empty %}
+        <p>Подій нема.</p>
+    {% endfor %}
+</body>
+</html>
