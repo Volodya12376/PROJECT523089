@@ -20,7 +20,6 @@ from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-
     path("", views.EventListView.as_view(), name="event_list"),
     path("calendar/", views.EventCalendarView.as_view(), name="event_calendar"),
     path("<int:pk>/", views.EventDetailView.as_view(), name="event_detail"),

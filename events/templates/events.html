@@ -7,7 +7,6 @@
 </head>
 <body>
     <h1>Події групи</h1>
-    <a href="{% url 'event_create' %}">Додати подію</a>
 
     <a href="{% url 'event_calendar' %}">Календар</a>
 
@@ -19,7 +18,7 @@
                 </a>
             </h2>
             <p>{{ event.description }}</p>
-            {{ event.starts_at|date:"d.m.Y H:i" }}
+            <p>{{ event.start_date }}</p>
         </div>
     {% empty %}
         <p>Подій нема.</p>
