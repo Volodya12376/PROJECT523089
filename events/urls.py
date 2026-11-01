@@ -18,8 +18,6 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
-app_name = "events"
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.EventListView.as_view(), name="event_list"),

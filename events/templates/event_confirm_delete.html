@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Видалення події</title>
+</head>
+<body>
+    <h1>Видалити подію?</h1>
+
+    <p>Ти справді хочеш видалити "{{ object.title }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <button type="submit">Так, видалити</button>
+    </form>
+
+    <a href="{% url 'event_list' %}">Скасувати</a>
+</body>
+</html>
