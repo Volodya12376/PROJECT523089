@@ -107,13 +107,16 @@ class ModeratorOrAdminMixin(LoginRequiredMixin, UserPassesTestMixin):
         user = self.request.user
 
         return (
-            user.is_superuser
-            or user.is_staff
-            or user.groups.filter(name="Модератори").exists()
+            user.is_authenticated
+            and (
+                user.is_superuser
+                or user.is_staff
+                or user.groups.filter(name="Модератори").exists()
+            )
         )
 
 
-class EventCreateView(ModeratorOrAdminMixin, CreateView):
+class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
     form_class = EventForm
     template_name = "event_form.html"
