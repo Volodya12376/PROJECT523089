@@ -1,27 +1,62 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Події</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Портал подій</title>
+    <link rel="stylesheet" href="{% static 'events/style.css' %}">
 </head>
 <body>
-    <h1>Події групи</h1>
 
-    <a href="{% url 'event_calendar' %}">Календар</a>
+<header class="navbar">
+    <span class="logo">Портал подій</span>
+    <nav>
+        <a href="{% url 'event_list' %}">Головна</a>
+        <a href="{% url 'event_calendar' %}">Календар</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <h1>Портал подій</h1>
+        <p>Переглядай події, дізнавайся деталі та стеж за розкладом.</p>
+    </section>
+
+    <h2 class="section-title">Доступні події</h2>
 
     {% for event in events %}
-        <div>
+        <div class="event-card">
             <h2>
                 <a href="{% url 'event_detail' event.pk %}">
                     {{ event.title }}
                 </a>
             </h2>
-            <p>{{ event.description }}</p>
-            <p>{{ event.start_date }}</p>
+
+            <p>{{ event.description|truncatewords:25 }}</p>
+
+            <p class="date">
+                📅 {{ event.starts_at|date:"d.m.Y H:i" }}
+            </p>
+
+            {% if event.location %}
+                <p>📍 {{ event.location }}</p>
+            {% endif %}
+
+            <div class="actions">
+                <a class="btn" href="{% url 'event_detail' event.pk %}">
+                    Детальніше
+                </a>
+            </div>
         </div>
     {% empty %}
-        <p>Подій нема.</p>
+        <div class="empty-state">
+            <h3>Подій поки немає</h3>
+            <p>Нові події з'являться тут.</p>
+        </div>
     {% endfor %}
+
+</main>
 </body>
 </html>
